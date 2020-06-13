@@ -2,6 +2,7 @@
 # and https://github.com/adafruit/Adafruit_Python_GPIO/blob/master/Adafruit_GPIO/I2C.py
 
 from device import get_default_bus
+from binascii import hexlify
 from time import sleep
 import logging
 import smbus
@@ -57,7 +58,7 @@ class SHT31(object):
     def read_status(self):
         self._write_cmd(SHT31_READSTATUS)
         data = self._bus.read_i2c_block_data(self._address, 0, 3)
-        self._logger.debug('Read status data: {0}'.format(data))
+        self._logger.debug('Read status data: 0x{0}'.format(hexlify(data))
         if data[2] != self._crc8(data[0:2]):
             self._logger.warning('Invalid CRC8 for read status')
             return None
