@@ -15,23 +15,22 @@ if sys.version_info > (3, 0):
     FRAME_START = bytes([0x42, 0x4d])
     READ_PASSIVE_CMD = FRAME_START + bytes([0xe2, 0x00, 0x00, 0x01, 0x71])
     SET_PASSIVE_CMD = FRAME_START + bytes([0xe1, 0x00, 0x00, 0x01, 0x70])
+    SET_PASSIVE_CMD_RESP = FRAME_START + bytes([0x00, 0x04, 0xe1, 0x00, 0x01, 0x74])
     SET_ACTIVE_CMD = FRAME_START + bytes([0xe1, 0x00, 0x01, 0x01, 0x71])
+    SET_ACTIVE_CMD_RESP = FRAME_START + bytes([0x00, 0x04, 0xe1, 0x01, 0x01, 0x75])
     SLEEP_CMD = FRAME_START + bytes([0xe4, 0x00, 0x00, 0x01, 0x73])
+    SLEEP_CMD_RESP = FRAME_START + bytes([0x00, 0x04, 0xe4, 0x00, 0x01, 0x74])
     WAKEUP_CMD = FRAME_START + bytes([0xe4, 0x00, 0x01, 0x01, 0x74])
+    WAKEUP_CMD_RESP = FRAME_START + bytes([0x00, 0x04, 0xe4, 0x01, 0x01, 0x78])
 else:
     FRAME_START = '\x42\x4d'
-
     READ_PASSIVE_CMD = FRAME_START + '\xe2\x00\x00\x01\x71'
-    
     SET_PASSIVE_CMD = FRAME_START + '\xe1\x00\x00\x01\x70'
     SET_PASSIVE_CMD_RESP = FRAME_START + '\x00\x04\xe1\x00\x01\x74'
-
     SET_ACTIVE_CMD = FRAME_START + '\xe1\x00\x01\x01\x71'
     SET_ACTIVE_CMD_RESP = FRAME_START + '\x00\x04\xe1\x01\x01\x75'
-
     SLEEP_CMD = FRAME_START + '\xe4\x00\x00\x01\x73'
     SLEEP_CMD_RESP = FRAME_START + '\x00\x04\xe4\x00\x01\x77'
-    
     WAKEUP_CMD = FRAME_START + '\xe4\x00\x01\x01\x74'
     WAKEUP_CMD_RESP = FRAME_START + '\x00\x04\xe4\x01\x01\x78'
 
