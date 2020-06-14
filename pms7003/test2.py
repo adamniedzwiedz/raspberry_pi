@@ -2,6 +2,7 @@ from pms7003 import Pms7003, Pms7003Exception
 from time import sleep
 import logging
 import sys
+import pdb
 
 logging.basicConfig()
 log = logging.getLogger('test2')
@@ -12,10 +13,22 @@ if __name__ == "__main__":
 
     while True:
         try:
-            for name, value in pms.read_measure(True).items():
+            print('Sending sleep command...')
+            print('Sleep result: {0}'.format(pms.sleep()))
+            print('Sending wake up command...')
+            print('Wake up result: {0}'.format(pms.wakeup()))
+            print('Setting passive mode...')
+            print('Result: {0}'.format(pms.set_passive_mode()))
+            print('Trigger measure...')
+            for name, value in pms.trigger_measure(True).items():
                 print('{0} = {1}'.format(name, value))
-            print('-' * 20)
-            sleep(5.0)
+            print('Set active mode...')
+            pms.set_active_mode()
+            for _ in range(0, 5):
+                for name, value in pms.read_measure(True).items():
+                    print('{0} = {1}'.format(name, value))
+                print('-' * 20)
+                sleep(5.0)
         except Pms7003Exception as err:
             log.error(err)
             sleep(5.0)
